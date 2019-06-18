@@ -158,7 +158,7 @@ impl Block for Pacman {
         self.output.set_text(format!("{}", count));
         self.output.set_state(match count {
             0 => State::Idle,
-            _ => State::Info,
+            _ => State::Critical,
         });
         Ok(Some(self.update_interval))
 
