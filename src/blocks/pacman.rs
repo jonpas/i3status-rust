@@ -116,9 +116,8 @@ fn get_update_count() -> Result<usize> {
         updates_db
     ))?;
 
-    // Get update count
-    Ok(
-        String::from_utf8(
+
+    let official = String::from_utf8(
             Command::new("sh")
                 .env("LC_ALL", "C")
                 .args(&[
@@ -131,8 +130,25 @@ fn get_update_count() -> Result<usize> {
         ).block_error("pacman", "there was a problem parsing the output")?
             .lines()
             .filter(|line| !line.contains("[ignored]"))
-            .count(),
-    )
+            .count();
+
+    let aur = String::from_utf8(
+            Command::new("sh")
+                .env("LC_ALL", "C")
+                .args(&[
+                    "-c",
+                    "yay -Qum"
+                ])
+                .output()
+                .block_error("pacman", "There was a problem running the pacman commands")?
+                .stdout,
+        ).block_error("pacman", "there was a problem parsing the output")?
+            .lines()
+            .filter(|line| !line.contains("[ignored]"))
+            .count();
+
+    // Get update count
+    Ok(official + aur)
 }
 
 
