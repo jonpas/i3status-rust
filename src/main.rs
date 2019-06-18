@@ -175,7 +175,7 @@ fn run(matches: &ArgMatches) -> Result<()> {
 
     let mut blocks: Vec<Box<Block>> = Vec::new();
 
-    let mut alternator = false;
+    let mut alternator = config.blocks.len() % 2 == 0;
     // Initialize the blocks
     for &(ref block_name, ref block_config) in &config.blocks {
         blocks.push(create_block(
