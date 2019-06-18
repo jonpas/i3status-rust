@@ -25,6 +25,8 @@ mod bluetooth;
 pub mod ibus;
 mod firewall;
 mod killswitch;
+mod vm;
+mod gpu_pt;
 
 use crate::config::Config;
 use self::time::*;
@@ -54,6 +56,8 @@ use self::bluetooth::*;
 use self::ibus::*;
 use self::firewall::*;
 use self::killswitch::*;
+use self::vm::*;
+use self::gpu_pt::*;
 
 use super::block::{Block, ConfigBlock};
 use crate::errors::*;
@@ -112,6 +116,8 @@ pub fn create_block(name: &str, block_config: Value, config: Config, tx_update_r
             "bluetooth" => Bluetooth,
             "ibus" => IBus,
             "firewall" => Firewall,
-            "killswitch" => Killswitch
+            "killswitch" => Killswitch,
+            "vm" => VM,
+            "gpu_pt" => GpuPt
     )
 }

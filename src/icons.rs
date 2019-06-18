@@ -108,7 +108,9 @@ lazy_static! {
         "keyboard" => " \u{f11c}",
         "mouse" => " \u{f245}",
         "firewall" => "  ",
-        "killswitch" => "  "
+        "killswitch" => "  ",
+        "vm" => "  "
+        "gpu_pt" => "  "
     };
 
     pub static ref MATERIAL: Map<String, String> = map_to_owned! {
