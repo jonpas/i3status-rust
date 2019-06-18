@@ -11,7 +11,7 @@ use crate::de::deserialize_duration;
 use crate::errors::*;
 use crate::widgets::text::TextWidget;
 use crate::widgets::graph::GraphWidget;
-use crate::widget::I3BarWidget;
+use crate::widget::{I3BarWidget, State};
 use crate::scheduler::Task;
 
 use uuid::Uuid;
@@ -414,18 +414,27 @@ impl Block for Net {
         let is_up = self.device.is_up()?;
         if !exists || !is_up {
             self.active = false;
-            self.network.set_text("×".to_string());
+            self.network.set_text(" down".to_string());
+            self.network.set_state(State::Critical);
             if let Some(ref mut tx_widget) = self.output_tx {
-                tx_widget.set_text("×".to_string());
+                tx_widget.set_text("x".to_string());
             };
             if let Some(ref mut rx_widget) = self.output_rx {
-                rx_widget.set_text("×".to_string());
+                rx_widget.set_text("x".to_string());
             };
 
             return Ok(Some(self.update_interval));
         } else {
             self.active = true;
-            self.network.set_text("".to_string());
+            if self.device.is_vpn() {
+                self.network.set_text(" up".to_string());
+            } else {
+                self.network.set_text("".to_string());
+            }
+            self.network.set_state(State::Good);
+            if let Some(ref mut ip_addr_widget) = self.ip_addr {
+                ip_addr_widget.set_state(State::Good);
+            }
         }
 
         // Update SSID and IP address every 30s and the bitrate every 10s
