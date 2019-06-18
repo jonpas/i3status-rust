@@ -106,7 +106,9 @@ lazy_static! {
         "headphones" => " \u{f025}",
         "joystick" => " \u{f11b}",
         "keyboard" => " \u{f11c}",
-        "mouse" => " \u{f245}"
+        "mouse" => " \u{f245}",
+        "firewall" => "  ",
+        "killswitch" => "  "
     };
 
     pub static ref MATERIAL: Map<String, String> = map_to_owned! {
