@@ -114,21 +114,30 @@ impl ConfigBlock for Music {
                     play = Some(
                         ButtonWidget::new(config.clone(), "play")
                             .with_icon("music_play")
-                            .with_state(State::Info),
+                            .with_state(State::Info)
+                            .with_separator("\u{e0b9}")
+                            .with_bg("#1db954")
+                            .with_fg("#191414"),
                     )
                 }
                 "next" => {
                     next = Some(
                         ButtonWidget::new(config.clone(), "next")
                             .with_icon("music_next")
-                            .with_state(State::Info),
+                            .with_state(State::Info)
+                            .with_separator("\u{e0b9}")
+                            .with_bg("#1db954")
+                            .with_fg("#191414"),
                     )
                 }
                 "prev" => {
                     prev = Some(
                         ButtonWidget::new(config.clone(), "prev")
                             .with_icon("music_prev")
-                            .with_state(State::Info),
+                            .with_state(State::Info)
+                            .with_separator("\u{e0b9}")
+                            .with_bg("#1db954")
+                            .with_fg("#191414"),
                     )
                 }
                 x => Err(BlockError(

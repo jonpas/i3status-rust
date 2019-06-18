@@ -107,7 +107,7 @@ impl RotatingTextWidget {
                     .skip(self.rotation_pos)
                     .take(self.width)
                     .collect();
-                avail.push_str("|");
+                avail.push_str(" | ");
                 avail.push_str(&self.content.chars().take(missing - 1).collect::<String>());
                 avail
             }
@@ -118,7 +118,9 @@ impl RotatingTextWidget {
     }
 
     fn update(&mut self) {
-        let (key_bg, key_fg) = self.state.theme_keys(&self.config.theme);
+        //let (key_bg, key_fg) = self.state.theme_keys(&self.config.theme);
+        let key_bg = "#1db954";
+        let key_fg = "#191414";
 
         self.rendered = json!({
             "full_text": format!("{}{} ",
